@@ -1,0 +1,14 @@
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:594:26:lv_color_make	16	static
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:599:26:lv_color_hex	24	static
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:695:26:lv_color_white	8	static
+../lvgl/demos/music/../../src/core/lv_obj_style_gen.h:139:26:lv_obj_get_style_bg_color	24	static
+../lvgl/demos/music/../../src/core/lv_disp.h:182:26:lv_scr_act	8	static
+../lvgl/demos/music/../../src/core/lv_disp.h:191:26:lv_layer_top	8	static
+../lvgl/demos/music/../../src/core/lv_disp.h:205:20:lv_scr_load	16	static
+../lvgl/demos/music/lv_demo_music.c:120:6:lv_demo_music	16	static
+../lvgl/demos/music/lv_demo_music.c:133:6:lv_demo_music_close	8	static
+../lvgl/demos/music/lv_demo_music.c:149:14:_lv_demo_music_get_title	16	static
+../lvgl/demos/music/lv_demo_music.c:155:14:_lv_demo_music_get_artist	16	static
+../lvgl/demos/music/lv_demo_music.c:161:14:_lv_demo_music_get_genre	16	static
+../lvgl/demos/music/lv_demo_music.c:167:10:_lv_demo_music_get_track_length	16	static
+../lvgl/demos/music/lv_demo_music.c:178:13:auto_step_cb	48	static

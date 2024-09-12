@@ -1,0 +1,11 @@
+../lvgl/demos/music/../../src/hal/../draw/../misc/../font/../misc/lv_area.h:294:26:lv_pct	2
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:594:26:lv_color_make	1
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:599:26:lv_color_hex	1
+../lvgl/demos/music/../../src/hal/../draw/../misc/lv_color.h:633:26:lv_color_hex3	1
+../lvgl/demos/music/../../src/core/lv_obj_style.h:92:20:lv_obj_remove_style_all	1
+../lvgl/demos/music/../../src/lv_api_map.h:75:24:lv_obj_get_child_id	1
+../lvgl/demos/music/lv_demo_music_list.c:53:12:_lv_demo_music_list_create	2
+../lvgl/demos/music/lv_demo_music_list.c:133:6:_lv_demo_music_list_close	1
+../lvgl/demos/music/lv_demo_music_list.c:145:6:_lv_demo_music_list_btn_check	2
+../lvgl/demos/music/lv_demo_music_list.c:165:19:add_list_btn	2
+../lvgl/demos/music/lv_demo_music_list.c:220:13:btn_click_event_cb	1

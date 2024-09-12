@@ -1,0 +1,9 @@
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/hal/../draw/../misc/lv_color.h:594:26:lv_color_make	16	static
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/hal/../draw/../misc/lv_color.h:699:26:lv_color_black	8	static
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/core/lv_disp.h:182:26:lv_scr_act	8	static
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/widgets/lv_slider.h:84:20:lv_slider_set_value	24	static
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/widgets/lv_slider.h:106:20:lv_slider_set_range	24	static
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/widgets/lv_slider.h:130:23:lv_slider_get_value	16	static
+../Core/Src/rgb_mixer.c:16:6:slider_callback	40	static
+../Core/Src/rgb_mixer.c:33:6:timer_callback	32	static
+../Core/Src/rgb_mixer.c:47:6:rgb_mixer_create_ui	32	static

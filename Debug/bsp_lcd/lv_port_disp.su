@@ -1,0 +1,5 @@
+../bsp_lcd/lv_port_disp.c:52:6:lv_port_disp_init	8	static
+../bsp_lcd/lv_port_disp.c:122:13:disp_init	8	static
+../bsp_lcd/lv_port_disp.c:131:6:disp_enable_update	4	static
+../bsp_lcd/lv_port_disp.c:137:6:disp_disable_update	4	static
+../bsp_lcd/lv_port_disp.c:144:13:disp_flush	32	static

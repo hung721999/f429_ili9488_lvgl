@@ -1,0 +1,4 @@
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/core/lv_disp.h:182:26:lv_scr_act	1
+../Core/Src/main.c:70:5:main	1
+../Core/Src/main.c:122:6:SystemClock_Config	4
+../Core/Src/main.c:174:6:Error_Handler	1
