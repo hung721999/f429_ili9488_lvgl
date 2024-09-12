@@ -147,8 +147,8 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 		/*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
 		int16_t width = area->x2 - area->x1 + 1;
 		int16_t height = area->y2 - area->y1 + 1;
-		ili9488_SetDisplayWindow(area->x1, area->y1, width, height);
-		ili9488_DrawBitmap(area->x1, area->y1, (uint8_t*) color_p);
+		// ili9488_DrawBitmap not work since different format
+		ili9488_DrawRGBImage(area->x1, area->y1, width, height, color_p);
 	}
 
 	/*IMPORTANT!!!

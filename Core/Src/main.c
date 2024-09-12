@@ -94,9 +94,8 @@ int main(void) {
 	lv_init();
 	lv_port_disp_init();
 	lv_port_indev_init();
-	disp_enable_update();
 
-	lv_disp_set_bg_color(lv_scr_act(), lv_palette_main(LV_PALETTE_LIGHT_BLUE));
+	lv_disp_set_bg_color(lv_scr_act(), lv_palette_main(LV_PALETTE_LIGHT_BLUE));		// must!!!!
 
 
 	/* USER CODE END 2 */

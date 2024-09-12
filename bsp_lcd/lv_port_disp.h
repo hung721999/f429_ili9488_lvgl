@@ -17,6 +17,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 #include "lvgl.h"
+#include "ili9488.h"
 
 /*********************
  *      DEFINES

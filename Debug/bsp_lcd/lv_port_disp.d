@@ -225,7 +225,8 @@ bsp_lcd/lv_port_disp.o: ../bsp_lcd/lv_port_disp.c \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/imgbtn/lv_imgbtn.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/imgbtn/../../../lvgl.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/span/lv_span.h \
- C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/span/../../../lvgl.h
+ C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/span/../../../lvgl.h \
+ ../bsp_lcd/ili9488.h
 ../bsp_lcd/lv_port_disp.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/lvgl.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../lvgl.h:
@@ -453,3 +454,4 @@ C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/ext
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/imgbtn/../../../lvgl.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/span/lv_span.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/src/../src/extra/widgets/span/../../../lvgl.h:
+../bsp_lcd/ili9488.h:
