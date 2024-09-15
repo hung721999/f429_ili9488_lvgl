@@ -225,6 +225,8 @@ lvgl/demos/stress/lv_demo_stress.o: ../lvgl/demos/stress/lv_demo_stress.c \
  ../lvgl/demos/stress/../../src/extra/widgets/imgbtn/../../../lvgl.h \
  ../lvgl/demos/stress/../../src/extra/widgets/span/lv_span.h \
  ../lvgl/demos/stress/../../src/extra/widgets/span/../../../lvgl.h \
+ ../lvgl/demos/stress/../widgets/lv_demo_widgets.h \
+ ../lvgl/demos/stress/../widgets/../lv_demos.h \
  ../lvgl/demos/stress/../music/lv_demo_music.h \
  ../lvgl/demos/stress/../music/../lv_demos.h
 ../lvgl/demos/stress/lv_demo_stress.h:
@@ -455,5 +457,7 @@ lvgl/demos/stress/lv_demo_stress.o: ../lvgl/demos/stress/lv_demo_stress.c \
 ../lvgl/demos/stress/../../src/extra/widgets/imgbtn/../../../lvgl.h:
 ../lvgl/demos/stress/../../src/extra/widgets/span/lv_span.h:
 ../lvgl/demos/stress/../../src/extra/widgets/span/../../../lvgl.h:
+../lvgl/demos/stress/../widgets/lv_demo_widgets.h:
+../lvgl/demos/stress/../widgets/../lv_demos.h:
 ../lvgl/demos/stress/../music/lv_demo_music.h:
 ../lvgl/demos/stress/../music/../lv_demos.h:

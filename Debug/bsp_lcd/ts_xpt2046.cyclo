@@ -6,4 +6,4 @@
 ../bsp_lcd/ts_xpt2046.c:304:10:TS_IO_GetY	1
 ../bsp_lcd/ts_xpt2046.c:316:10:TS_IO_GetZ1	1
 ../bsp_lcd/ts_xpt2046.c:328:10:TS_IO_GetZ2	1
-../bsp_lcd/ts_xpt2046.c:342:9:TS_IO_DetectTouch	4
+../bsp_lcd/ts_xpt2046.c:342:9:TS_IO_DetectTouch	3

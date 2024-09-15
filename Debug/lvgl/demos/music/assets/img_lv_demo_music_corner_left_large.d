@@ -228,6 +228,8 @@ lvgl/demos/music/assets/img_lv_demo_music_corner_left_large.o: \
  ../lvgl/demos/music/assets/../../../src/extra/widgets/imgbtn/../../../lvgl.h \
  ../lvgl/demos/music/assets/../../../src/extra/widgets/span/lv_span.h \
  ../lvgl/demos/music/assets/../../../src/extra/widgets/span/../../../lvgl.h \
+ ../lvgl/demos/music/assets/../../widgets/lv_demo_widgets.h \
+ ../lvgl/demos/music/assets/../../widgets/../lv_demos.h \
  ../lvgl/demos/music/assets/../../music/lv_demo_music.h
 ../lvgl/demos/music/assets/../lv_demo_music.h:
 ../lvgl/demos/music/assets/../../lv_demos.h:
@@ -457,4 +459,6 @@ lvgl/demos/music/assets/img_lv_demo_music_corner_left_large.o: \
 ../lvgl/demos/music/assets/../../../src/extra/widgets/imgbtn/../../../lvgl.h:
 ../lvgl/demos/music/assets/../../../src/extra/widgets/span/lv_span.h:
 ../lvgl/demos/music/assets/../../../src/extra/widgets/span/../../../lvgl.h:
+../lvgl/demos/music/assets/../../widgets/lv_demo_widgets.h:
+../lvgl/demos/music/assets/../../widgets/../lv_demos.h:
 ../lvgl/demos/music/assets/../../music/lv_demo_music.h:

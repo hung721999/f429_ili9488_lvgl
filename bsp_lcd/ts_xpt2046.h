@@ -25,4 +25,4 @@
 #define TS_SCK            C, 10
 #define TS_MOSI           C, 12
 #define TS_MISO           C, 11
-#define TS_IRQ            X, 0  /* If not used leave it that way */
+#define TS_IRQ            C, 8  /* If not used leave it that way */

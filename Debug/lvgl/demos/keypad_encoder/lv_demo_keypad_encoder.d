@@ -228,6 +228,8 @@ lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.o: \
  ../lvgl/demos/keypad_encoder/../../src/extra/widgets/imgbtn/../../../lvgl.h \
  ../lvgl/demos/keypad_encoder/../../src/extra/widgets/span/lv_span.h \
  ../lvgl/demos/keypad_encoder/../../src/extra/widgets/span/../../../lvgl.h \
+ ../lvgl/demos/keypad_encoder/../widgets/lv_demo_widgets.h \
+ ../lvgl/demos/keypad_encoder/../widgets/../lv_demos.h \
  ../lvgl/demos/keypad_encoder/../music/lv_demo_music.h \
  ../lvgl/demos/keypad_encoder/../music/../lv_demos.h
 ../lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.h:
@@ -458,5 +460,7 @@ lvgl/demos/keypad_encoder/lv_demo_keypad_encoder.o: \
 ../lvgl/demos/keypad_encoder/../../src/extra/widgets/imgbtn/../../../lvgl.h:
 ../lvgl/demos/keypad_encoder/../../src/extra/widgets/span/lv_span.h:
 ../lvgl/demos/keypad_encoder/../../src/extra/widgets/span/../../../lvgl.h:
+../lvgl/demos/keypad_encoder/../widgets/lv_demo_widgets.h:
+../lvgl/demos/keypad_encoder/../widgets/../lv_demos.h:
 ../lvgl/demos/keypad_encoder/../music/lv_demo_music.h:
 ../lvgl/demos/keypad_encoder/../music/../lv_demos.h:

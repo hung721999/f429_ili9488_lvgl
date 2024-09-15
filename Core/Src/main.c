@@ -95,14 +95,12 @@ int main(void) {
 	lv_port_disp_init();
 	lv_port_indev_init();
 
-	lv_disp_set_bg_color(NULL, lv_palette_main(LV_PALETTE_DEEP_PURPLE));		// must!!!!
-
-
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	rgb_mixer_create_ui();
+//	lv_demo_widgets();
 	while (1) {
 		/* USER CODE END WHILE */
 

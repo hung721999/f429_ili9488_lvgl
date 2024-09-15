@@ -46,11 +46,14 @@ void timer_callback(struct _lv_timer_t *timer) {
 
 void rgb_mixer_create_ui() {
 	lv_obj_t *act_scr = lv_scr_act();
+//	lv_obj_set_style_bg_color(act_scr, lv_palette_main(LV_PALETTE_LIGHT_BLUE), LV_PART_MAIN);
+
 	r.slider_type = SLIDER_R;
 	g.slider_type = SLIDER_G;
 	b.slider_type = SLIDER_B;
 
 	slider_r = lv_slider_create(act_scr);
+	lv_obj_set_width(slider_r, 400);
 	lv_slider_set_range(slider_r, 0, 255);
 	lv_obj_align(slider_r, LV_ALIGN_TOP_MID, 0, 50);
 	lv_obj_set_style_bg_color(slider_r, lv_palette_main(LV_PALETTE_RED),
@@ -59,6 +62,7 @@ void rgb_mixer_create_ui() {
 			LV_PART_KNOB);
 
 	slider_g = lv_slider_create(act_scr);
+	lv_obj_set_width(slider_g, 400);
 	lv_slider_set_range(slider_g, 0, 255);
 	lv_obj_align_to(slider_g, slider_r, LV_ALIGN_TOP_MID, 0, 40);
 	lv_obj_set_style_bg_color(slider_g, lv_palette_main(LV_PALETTE_GREEN),
@@ -67,6 +71,7 @@ void rgb_mixer_create_ui() {
 			LV_PART_KNOB);
 
 	slider_b = lv_slider_create(act_scr);
+	lv_obj_set_width(slider_b, 400);
 	lv_slider_set_range(slider_b, 0, 255);
 	lv_obj_align_to(slider_b, slider_g, LV_ALIGN_TOP_MID, 0, 40);
 	lv_obj_set_style_bg_color(slider_b, lv_palette_main(LV_PALETTE_BLUE),
@@ -75,7 +80,7 @@ void rgb_mixer_create_ui() {
 			LV_PART_KNOB);
 
 	rect = lv_obj_create(act_scr);
-	lv_obj_set_size(rect, 300, 60);
+	lv_obj_set_size(rect, 400, 80);
 	lv_obj_align_to(rect, slider_b, LV_ALIGN_TOP_MID, 0, 40);
 	lv_obj_set_style_border_color(rect, lv_color_black(), LV_PART_MAIN);
 	lv_obj_set_style_border_width(rect, 5, LV_PART_MAIN);
@@ -96,10 +101,10 @@ void rgb_mixer_create_ui() {
 	lv_label_set_text(b.label, "0");
 	lv_obj_align_to(b.label, slider_b, LV_ALIGN_TOP_MID, 0, -20);
 
-	//lv_obj_add_event_cb(slider_r, slider_callback, LV_EVENT_VALUE_CHANGED, &r);
-	//lv_obj_add_event_cb(slider_g, slider_callback, LV_EVENT_VALUE_CHANGED, &g);
-	//lv_obj_add_event_cb(slider_b, slider_callback, LV_EVENT_VALUE_CHANGED, &b);
+	lv_obj_add_event_cb(slider_r, slider_callback, LV_EVENT_VALUE_CHANGED, &r);
+	lv_obj_add_event_cb(slider_g, slider_callback, LV_EVENT_VALUE_CHANGED, &g);
+	lv_obj_add_event_cb(slider_b, slider_callback, LV_EVENT_VALUE_CHANGED, &b);
 
-	lv_timer_create(timer_callback, 1000, NULL);
+//	lv_timer_create(timer_callback, 1000, NULL);
 
 }
