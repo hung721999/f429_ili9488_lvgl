@@ -103,9 +103,9 @@
 #pragma push
 #pragma O0
 #endif
-void TS_IO_Delay(uint32_t c)
-{
-  while(c--);
+void TS_IO_Delay(uint32_t c) {
+	while (c--)
+		;
 }
 #ifdef  __GNUC__
 #pragma GCC pop_options
@@ -221,143 +221,140 @@ uint16_t TsRead16(void)
 #endif
 
 //-----------------------------------------------------------------------------
-void TsWrite8(uint8_t d8)
-{
-  *(volatile uint8_t *)&SPIX->DR = d8;
-  TS_IO_Delay(2);
-  while(BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos));
-  d8 = *(volatile uint8_t *)&SPIX->DR;
+void TsWrite8(uint8_t d8) {
+	*(volatile uint8_t*) &SPIX->DR = d8;
+	TS_IO_Delay(2);
+	while (BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos))
+		;
+	d8 = *(volatile uint8_t*) &SPIX->DR;
 }
 
 //-----------------------------------------------------------------------------
-uint16_t TsRead16(void)
-{
-  uint8_t d8_h, d8_l;
-  *(volatile uint8_t *)&SPIX->DR = 0;
-  TS_IO_Delay(2);
-  while(BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos));
-  d8_h = *(uint8_t *)&SPIX->DR;
-  *(volatile uint8_t *)&SPIX->DR = 0;
-  TS_IO_Delay(2);
-  while(BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos));
-  d8_l = *(uint8_t *)&SPIX->DR;
-  return (d8_h << 8) + d8_l;
+uint16_t TsRead16(void) {
+	uint8_t d8_h, d8_l;
+	*(volatile uint8_t*) &SPIX->DR = 0;
+	TS_IO_Delay(2);
+	while (BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos))
+		;
+	d8_h = *(uint8_t*) &SPIX->DR;
+	*(volatile uint8_t*) &SPIX->DR = 0;
+	TS_IO_Delay(2);
+	while (BITBAND_ACCESS(SPIX->SR, SPI_SR_BSY_Pos))
+		;
+	d8_l = *(uint8_t*) &SPIX->DR;
+	return (d8_h << 8) + d8_l;
 }
 
 #endif  /* #if TS_SPI == 0 */
 
 //-----------------------------------------------------------------------------
-void TS_IO_Init(void)
-{
-  #if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
-  #define GPIOX_CLOCK_TS_IRQ   GPIOX_CLOCK(TS_IRQ)
-  #else
+void TS_IO_Init(void) {
+#if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
+#define GPIOX_CLOCK_TS_IRQ   GPIOX_CLOCK(TS_IRQ)
+#else
   #define GPIOX_CLOCK_TS_IRQ   0
   #endif
 
-  RCC->AHB1ENR |= GPIOX_CLOCK(TS_CS) | GPIOX_CLOCK(TS_SCK) | GPIOX_CLOCK(TS_MOSI) | GPIOX_CLOCK(TS_MISO) | GPIOX_CLOCK_TS_IRQ;
+	RCC->AHB1ENR |= GPIOX_CLOCK(TS_CS) | GPIOX_CLOCK(TS_SCK) |
+	GPIOX_CLOCK(TS_MOSI) | GPIOX_CLOCK(TS_MISO) |
+	GPIOX_CLOCK_TS_IRQ;
 
-  TS_CS_OFF;
-  GPIOX_ODR(TS_SCK) = 1;
-  GPIOX_ODR(TS_MOSI) = 1;
-  #if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
-  GPIOX_MODER(MODE_DIGITAL_INPUT, TS_IRQ);
-  #endif
-  GPIOX_MODER(MODE_OUT, TS_CS);
-  GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_CS);
-  GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_SCK);
-  GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_MOSI);
-  #if TS_SPI == 0
+	TS_CS_OFF;
+	GPIOX_ODR(TS_SCK) = 1;
+	GPIOX_ODR(TS_MOSI) = 1;
+#if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
+	GPIOX_MODER(MODE_DIGITAL_INPUT, TS_IRQ);
+#endif
+	GPIOX_MODER(MODE_OUT, TS_CS);
+	GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_CS);
+	GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_SCK);
+	GPIOX_OSPEEDR(MODE_SPD_VHIGH, TS_MOSI);
+#if TS_SPI == 0
   /* Software SPI */
   GPIOX_MODER(MODE_OUT, TS_SCK);
   GPIOX_MODER(MODE_OUT, TS_MOSI);
   GPIOX_MODER(MODE_DIGITAL_INPUT, TS_MISO);
   #else
-  /* Hardware SPI */
-  GPIOX_AFR(TS_SPI_AFR, TS_SCK);
-  GPIOX_MODER(MODE_ALTER, TS_SCK);
-  GPIOX_AFR(TS_SPI_AFR, TS_MOSI);
-  GPIOX_MODER(MODE_ALTER, TS_MOSI);
-  GPIOX_AFR(TS_SPI_AFR, TS_MISO);
-  GPIOX_MODER(MODE_ALTER, TS_MISO);
+	/* Hardware SPI */
+	GPIOX_AFR(TS_SPI_AFR, TS_SCK);
+	GPIOX_MODER(MODE_ALTER, TS_SCK);
+	GPIOX_AFR(TS_SPI_AFR, TS_MOSI);
+	GPIOX_MODER(MODE_ALTER, TS_MOSI);
+	GPIOX_AFR(TS_SPI_AFR, TS_MISO);
+	GPIOX_MODER(MODE_ALTER, TS_MISO);
 
-  TS_SPI_RCC_EN;
-  SPIX->CR1 = SPI_CR1_CPHA | SPI_CR1_CPOL | SPI_CR1_MSTR | SPI_CR1_SSM | SPI_CR1_SSI | (TS_SPI_SPD << SPI_CR1_BR_Pos);
-  SPIX->CR1 |= SPI_CR1_SPE;
-  #endif
+	TS_SPI_RCC_EN;
+	SPIX->CR1 = SPI_CR1_CPHA | SPI_CR1_CPOL | SPI_CR1_MSTR | SPI_CR1_SSM
+			| SPI_CR1_SSI | (TS_SPI_SPD << SPI_CR1_BR_Pos);
+	SPIX->CR1 |= SPI_CR1_SPE;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 /* read the X position */
-uint16_t TS_IO_GetX(void)
-{
-  uint16_t ret;
-  TS_CS_ON;
-  TsWrite8(0x90);
-  ret = TsRead16();
-  TS_CS_OFF;
-  return ret >> 3;
+uint16_t TS_IO_GetX(void) {
+	uint16_t ret;
+	TS_CS_ON;
+	TsWrite8(0x90);
+	ret = TsRead16();
+	TS_CS_OFF;
+	return ret >> 3;
 }
 
 //-----------------------------------------------------------------------------
 /* read the Y position */
-uint16_t TS_IO_GetY(void)
-{
-  uint16_t ret;
-  TS_CS_ON;
-  TsWrite8(0xD0);
-  ret = TsRead16();
-  TS_CS_OFF;
-  return ret >> 3;
+uint16_t TS_IO_GetY(void) {
+	uint16_t ret;
+	TS_CS_ON;
+	TsWrite8(0xD0);
+	ret = TsRead16();
+	TS_CS_OFF;
+	return ret >> 3;
 }
 
 //-----------------------------------------------------------------------------
 /* read the Z1 position */
-uint16_t TS_IO_GetZ1(void)
-{
-  uint16_t ret;
-  TS_CS_ON;
-  TsWrite8(0xB0);
-  ret = TsRead16();
-  TS_CS_OFF;
-  return ret >> 3;
+uint16_t TS_IO_GetZ1(void) {
+	uint16_t ret;
+	TS_CS_ON;
+	TsWrite8(0xB0);
+	ret = TsRead16();
+	TS_CS_OFF;
+	return ret >> 3;
 }
 
 //-----------------------------------------------------------------------------
 /* read the Z2 position */
-uint16_t TS_IO_GetZ2(void)
-{
-  uint16_t ret;
-  TS_CS_ON;
-  TsWrite8(0xC0);
-  ret = TsRead16();
-  TS_CS_OFF;
-  return ret >> 3;
+uint16_t TS_IO_GetZ2(void) {
+	uint16_t ret;
+	TS_CS_ON;
+	TsWrite8(0xC0);
+	ret = TsRead16();
+	TS_CS_OFF;
+	return ret >> 3;
 }
 
 //-----------------------------------------------------------------------------
 /* return:
-   - 0 : touchscreen is not pressed
-   - 1 : touchscreen is pressed */
-uint8_t TS_IO_DetectTouch(void)
-{
-  uint8_t  ret;
-  static uint8_t ts_inited = 0;
-  if(!ts_inited)
-  {	  
-    TS_IO_Init();
-    ts_inited = 1;
-  }	
-  #if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
-  if(GPIOX_IDR(TS_IRQ))
-    ret = 0;
-  else
-    ret = 1;
-  #else
+ - 0 : touchscreen is not pressed
+ - 1 : touchscreen is pressed */
+uint8_t TS_IO_DetectTouch(void) {
+	uint8_t ret;
+	static uint8_t ts_inited = 0;
+	if (!ts_inited) {
+		TS_IO_Init();
+		ts_inited = 1;
+	}
+#if GPIOX_PORTNUM(TS_IRQ) >= GPIOX_PORTNUM_A
+	if (GPIOX_IDR(TS_IRQ))
+		ret = 0;
+	else
+		ret = 1;
+#else
   if((TS_IO_GetZ1() > TS_ZSENS) || (TS_IO_GetZ2() < (4095 - TS_ZSENS)))
     ret = 1;
   else
     ret = 0;
   #endif
-  return ret;
+	return ret;
 }
