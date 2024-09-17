@@ -99,8 +99,8 @@ int main(void) {
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	rgb_mixer_create_ui();
-//	lv_demo_widgets();
+//	rgb_mixer_create_ui();
+	lv_demo_widgets();
 	while (1) {
 		/* USER CODE END WHILE */
 

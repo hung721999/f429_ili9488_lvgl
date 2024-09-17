@@ -316,7 +316,7 @@ uint16_t ili9488_ReadID(void) {
  */
 void ili9488_SetCursor(uint16_t Xpos, uint16_t Ypos) {
 	ILI9488_LCDMUTEX_PUSH();
-	ILI9488_SETCURSOR(Xpos, Ypos); ILI9488_LCDMUTEX_POP();
+	ILI9488_SETCURSOR(Xpos, Ypos);ILI9488_LCDMUTEX_POP();
 }
 
 /* The SPI mode not capable the 16bpp mode -> convert to 24bpp */
@@ -629,7 +629,7 @@ void ili9488_Scroll(int16_t Scroll, uint16_t TopFix, uint16_t BottonFix) {
 	if (Scroll != scrparam[0]) {
 		scrparam[0] = Scroll;
 		LCD_IO_WriteCmd8DataFill16(ILI9488_VSCRSADD, scrparam[0], 1);
-	} ILI9488_LCDMUTEX_POP();
+	}ILI9488_LCDMUTEX_POP();
 }
 
 //=============================================================================
@@ -651,8 +651,7 @@ int32_t  ts_cindex[] = TS_CINDEX_2;
 int32_t ts_cindex[] = TS_CINDEX_3;
 #endif
 
-		uint16_t tx,
-ty;
+uint16_t tx, ty;
 
 /* Link function for Touchscreen */
 uint8_t TS_IO_DetectTouch(void);

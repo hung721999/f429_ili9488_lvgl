@@ -11,6 +11,7 @@
  *********************/
 #include "lv_port_indev.h"
 #include "lvgl.h"
+#include "ts_xpt2046.h"
 
 /*********************
  *      DEFINES
@@ -33,6 +34,7 @@ static void touchpad_get_xy(lv_coord_t *x, lv_coord_t *y);
  *  STATIC VARIABLES
  **********************/
 lv_indev_t *indev_touchpad;
+extern int32_t ts_cindex[];
 
 /**********************
  *      MACROS
@@ -118,8 +120,10 @@ static void touchpad_get_xy(lv_coord_t *x, lv_coord_t *y) {
 	ili9488_ts_GetXY(&a, &b);
 	x1 = a;
 	y1 = b;
-	x2 = (ts_cindex[1] * x1 + ts_cindex[2] * y1 + ts_cindex[3]) / ts_cindex[0];
-	y2 = (ts_cindex[4] * x1 + ts_cindex[5] * y1 + ts_cindex[6]) / ts_cindex[0];
+	x2 = ts_cindex[1] * x1 / ts_cindex[0] + ts_cindex[2] * y1 / ts_cindex[0]
+			+ ts_cindex[3] / ts_cindex[0];
+	y2 = ts_cindex[4] * x1 / ts_cindex[0] + ts_cindex[5] * y1 / ts_cindex[0]
+			+ ts_cindex[6] / ts_cindex[0];
 
 	if (x2 < 0)
 		x2 = 0;
