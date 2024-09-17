@@ -14,7 +14,7 @@
 /* SPI write and read speed
    - software SPI: 0=none delay, 1=nop, 2=CLK pin double write, 3.. = TS_IO_Delay(TS_SPI_SPD - 3)
    - hardware SPI clock div fPCLK: 0=/2, 1=/4, 2=/8, 3=/16, 4=/32, 5=/64, 6=/128, 7=/256 */
-#define TS_SPI_SPD        1
+#define TS_SPI_SPD        2
 
 /* SPI pins alternative function assign (0..15), (only hardware SPI) */
 #define TS_SPI_AFR        6

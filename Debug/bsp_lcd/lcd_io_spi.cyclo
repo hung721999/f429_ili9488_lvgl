@@ -1,3 +1,5 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Drivers/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	2
 ../bsp_lcd/lcd_io_spi.c:652:13:LcdDirRead	3
 ../bsp_lcd/lcd_io_spi.c:668:13:LcdDirWrite	3
 ../bsp_lcd/lcd_io_spi.c:684:13:LcdWrite8	2
@@ -6,11 +8,16 @@
 ../bsp_lcd/lcd_io_spi.c:714:13:LcdWrite16	2
 ../bsp_lcd/lcd_io_spi.c:723:17:LcdRead16	2
 ../bsp_lcd/lcd_io_spi.c:733:13:LcdCmdWrite16	2
-../bsp_lcd/lcd_io_spi.c:795:6:LCD_IO_WriteMultiData8	3
-../bsp_lcd/lcd_io_spi.c:807:6:LCD_IO_WriteMultiData16	3
-../bsp_lcd/lcd_io_spi.c:1025:6:LCD_IO_ReadMultiData8	2
-../bsp_lcd/lcd_io_spi.c:1039:6:LCD_IO_ReadMultiData16	2
-../bsp_lcd/lcd_io_spi.c:1053:6:LCD_IO_ReadMultiData16to24	2
+../bsp_lcd/lcd_io_spi.c:760:13:WaitForDmaEnd	2
+../bsp_lcd/lcd_io_spi.c:832:6:DMA2_Stream3_IRQHandler	5
+../bsp_lcd/lcd_io_spi.c:861:6:LCD_IO_WriteMultiData	2
+../bsp_lcd/lcd_io_spi.c:877:6:LCD_IO_WriteMultiData8	10
+../bsp_lcd/lcd_io_spi.c:943:6:LCD_IO_WriteMultiData16	12
+../bsp_lcd/lcd_io_spi.c:1082:6:DMA2_Stream2_IRQHandler	5
+../bsp_lcd/lcd_io_spi.c:1117:6:LCD_IO_ReadMultiData	2
+../bsp_lcd/lcd_io_spi.c:1131:6:LCD_IO_ReadMultiData8	3
+../bsp_lcd/lcd_io_spi.c:1161:6:LCD_IO_ReadMultiData16	3
+../bsp_lcd/lcd_io_spi.c:1191:6:LCD_IO_ReadMultiData16to24	10
 ../bsp_lcd/lcd_io_spi.c:1263:6:LCD_IO_Delay	2
 ../bsp_lcd/lcd_io_spi.c:1276:6:LCD_Delay	1
 ../bsp_lcd/lcd_io_spi.c:1282:6:LCD_IO_Bl_OnOff	1

@@ -19,8 +19,8 @@
 /* SPI write and read speed
  - software SPI: 0=none delay, 1=nop, 2=CLK pin double write, 3.. = LCD_IO_Delay(LCD_SPI_SPD - 3)
  - hardware SPI clock div fPCLK: 0=/2, 1=/4, 2=/8, 3=/16, 4=/32, 5=/64, 6=/128, 7=/256 */
-#define LCD_SPI_SPD_WRITE 		0
-#define LCD_SPI_SPD_READ 		0
+#define LCD_SPI_SPD_WRITE 		1
+#define LCD_SPI_SPD_READ 		1
 
 /* SPI pins alternative function assign (0..15), (only hardware SPI) */
 #define LCD_SPI_AFR 			5
@@ -50,8 +50,8 @@
  - 0..7: DMA channel (DMA request mapping)
  - 0..7: Stream (DMA request mapping)
  - 1..3: DMA priority (0=low..3=very high) */
-#define LCD_DMA_TX 				0, 0, 0, 0
-#define LCD_DMA_RX 				0, 0, 0, 0
+#define LCD_DMA_TX 				2, 3, 3, 3
+#define LCD_DMA_RX 				2, 3, 2, 3
 
 /* DMA interrupt priority (see NVIC_SetPriority function, default value: 15) */
 #define LCD_DMA_IRQ_PR 			15
