@@ -1,6 +1,10 @@
 #include "ili9488.h"
+#include "lcd_io_spi.h"
 
 #include "main.h"
+
+#define DMANUM_(a, b, c, d)             a
+#define DMANUM(a)                       DMANUM_(a)
 
 #define ILI9488_NOP           0x00
 #define ILI9488_SWRESET       0x01
@@ -209,8 +213,9 @@ void ili9488_Init(void) {
 	LCD_IO_WriteCmd8(ILI9488_IMCTR);
 	LCD_IO_WriteData8(0x80); // Interface Mode Control (SDO NOT USE)
 #else
-  LCD_IO_WriteCmd8(ILI9488_IMCTR); LCD_IO_WriteData8(0x00); // Interface Mode Control (SDO USE)
-  #endif
+	LCD_IO_WriteCmd8(ILI9488_IMCTR);
+	LCD_IO_WriteData8(0x00); // Interface Mode Control (SDO USE)
+#endif
 #elif ILI9488_INTERFACE == 1
   LCD_IO_WriteCmd8(ILI9488_PIXFMT); LCD_IO_WriteData8(0x55); // Interface Pixel Format (16 bit)
   #endif
@@ -528,14 +533,27 @@ void ili9488_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 	ili9488_SetDisplayWindow(Xpos, Ypos, Xsize, Ysize);
 #if ILI9488_INTERFACE == 0
 	LCD_IO_WriteCmd8(ILI9488_RAMWR);
+#if DMANUM(LCD_DMA_TX)
+	uint8_t data[size * 3] = { 0 };
+	for (uint32_t i = 0; i < size * 3; i += 3) {
+		data[i] = (*pdata & 0xF800) >> 8;
+		data[i + 1] = (*pdata & 0x07E0) >> 3;
+		data[i + 2] = (*pdata & 0x001F) << 3;
+	}
+	WaitForDmaEnd();
+	LcdSpiMode8();
+	LCD_CS_ON;
+	LCD_IO_WriteMultiData8(data, size * 3, 1);
+#else
 	while (size--) {
 		ili9488_write16to24(*pdata);
 		pdata++;
-	}
+#endif
+}
 #elif ILI9488_INTERFACE == 1
   LCD_IO_WriteCmd8MultipleData16(ILI9488_RAMWR, pdata, size);
   #endif
-	ILI9488_LCDMUTEX_POP();
+ILI9488_LCDMUTEX_POP();
 }
 
 //-----------------------------------------------------------------------------
@@ -550,17 +568,17 @@ void ili9488_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
  * @brief  Draw direction: right then down
  */
 void ili9488_ReadRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
-		uint16_t Ysize, uint16_t *pdata) {
-	uint32_t size = 0;
-	size = (Xsize * Ysize);
-	ILI9488_LCDMUTEX_PUSH();
-	ili9488_SetDisplayWindow(Xpos, Ypos, Xsize, Ysize);
+	uint16_t Ysize, uint16_t *pdata) {
+uint32_t size = 0;
+size = (Xsize * Ysize);
+ILI9488_LCDMUTEX_PUSH();
+ili9488_SetDisplayWindow(Xpos, Ypos, Xsize, Ysize);
 #if ILI9488_INTERFACE == 0
-	LCD_IO_ReadCmd8MultipleData24to16(ILI9488_RAMRD, pdata, size, 1);
+LCD_IO_ReadCmd8MultipleData24to16(ILI9488_RAMRD, pdata, size, 1);
 #elif ILI9488_INTERFACE == 1
   LCD_IO_ReadCmd8MultipleData16(ILI9488_RAMRD, pdata, size, 1);
   #endif
-	ILI9488_LCDMUTEX_POP();
+ILI9488_LCDMUTEX_POP();
 }
 
 //-----------------------------------------------------------------------------
@@ -572,8 +590,8 @@ void ili9488_ReadRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
  * @retval None
  */
 void ili9488_Scroll(int16_t Scroll, uint16_t TopFix, uint16_t BottonFix) {
-	static uint16_t scrparam[4] = { 0, 0, 0, 0 };
-	ILI9488_LCDMUTEX_PUSH();
+static uint16_t scrparam[4] = { 0, 0, 0, 0 };
+ILI9488_LCDMUTEX_PUSH();
 #if (ILI9488_ORIENTATION == 0)
   if((TopFix != scrparam[1]) || (BottonFix != scrparam[3]))
   {
@@ -588,19 +606,18 @@ void ili9488_Scroll(int16_t Scroll, uint16_t TopFix, uint16_t BottonFix) {
   else
     Scroll = Scroll + scrparam[1];
   #elif (ILI9488_ORIENTATION == 1)
-  if((TopFix != scrparam[1]) || (BottonFix != scrparam[3]))
-  {
-    scrparam[1] = TopFix;
-    scrparam[3] = BottonFix;
-    scrparam[2] = ILI9488_LCD_PIXEL_HEIGHT - TopFix - BottonFix;
-    LCD_IO_WriteCmd8MultipleData16(ILI9488_VSCRDEF, &scrparam[1], 3);
-  }
-  Scroll = (0 - Scroll) % scrparam[2];
-  if(Scroll < 0)
-    Scroll = scrparam[2] + Scroll + scrparam[1];
-  else
-    Scroll = Scroll + scrparam[1];
-  #elif (ILI9488_ORIENTATION == 2)
+if ((TopFix != scrparam[1]) || (BottonFix != scrparam[3])) {
+	scrparam[1] = TopFix;
+	scrparam[3] = BottonFix;
+	scrparam[2] = ILI9488_LCD_PIXEL_HEIGHT - TopFix - BottonFix;
+	LCD_IO_WriteCmd8MultipleData16(ILI9488_VSCRDEF, &scrparam[1], 3);
+}
+Scroll = (0 - Scroll) % scrparam[2];
+if (Scroll < 0)
+	Scroll = scrparam[2] + Scroll + scrparam[1];
+else
+	Scroll = Scroll + scrparam[1];
+#elif (ILI9488_ORIENTATION == 2)
   if((TopFix != scrparam[3]) || (BottonFix != scrparam[1]))
   {
     scrparam[3] = TopFix;
@@ -626,10 +643,10 @@ void ili9488_Scroll(int16_t Scroll, uint16_t TopFix, uint16_t BottonFix) {
 	else
 		Scroll = Scroll + scrparam[1];
 #endif
-	if (Scroll != scrparam[0]) {
-		scrparam[0] = Scroll;
-		LCD_IO_WriteCmd8DataFill16(ILI9488_VSCRSADD, scrparam[0], 1);
-	}ILI9488_LCDMUTEX_POP();
+if (Scroll != scrparam[0]) {
+	scrparam[0] = Scroll;
+	LCD_IO_WriteCmd8DataFill16(ILI9488_VSCRSADD, scrparam[0], 1);
+}ILI9488_LCDMUTEX_POP();
 }
 
 //=============================================================================
@@ -644,14 +661,15 @@ void ili9488_Scroll(int16_t Scroll, uint16_t TopFix, uint16_t BottonFix) {
 #if (LCD_ORIENTATION == 0)
 int32_t  ts_cindex[] = TS_CINDEX_0;
 #elif (LCD_ORIENTATION == 1)
-int32_t  ts_cindex[] = TS_CINDEX_1;
+int32_t ts_cindex[] = TS_CINDEX_1;
 #elif (LCD_ORIENTATION == 2)
-int32_t  ts_cindex[] = TS_CINDEX_2;
+	int32_t ts_cindex[] = TS_CINDEX_2;
 #elif (LCD_ORIENTATION == 3)
-int32_t ts_cindex[] = TS_CINDEX_3;
+	int32_t ts_cindex[] = TS_CINDEX_3;
 #endif
 
-uint16_t tx, ty;
+	uint16_t tx,
+ty;
 
 /* Link function for Touchscreen */
 uint8_t TS_IO_DetectTouch(void);
@@ -662,15 +680,15 @@ uint16_t TS_IO_GetZ2(void);
 
 //-----------------------------------------------------------------------------
 void ili9488_ts_Init() {
-	if ((Is_ili9488_Initialized & ILI9488_IO_INITIALIZED) == 0)
-		LCD_IO_Init();
-	Is_ili9488_Initialized |= ILI9488_IO_INITIALIZED;
+if ((Is_ili9488_Initialized & ILI9488_IO_INITIALIZED) == 0)
+	LCD_IO_Init();
+Is_ili9488_Initialized |= ILI9488_IO_INITIALIZED;
 }
 
 //-----------------------------------------------------------------------------
 uint8_t ili9488_ts_DetectTouch() {
-	static uint8_t ret = 0;
-	int32_t x1, x2, y1, y2, i;
+static uint8_t ret = 0;
+int32_t x1, x2, y1, y2, i;
 
 #if TS_MULTITASK_MUTEX == 1
   io_ts_busy = 1;
@@ -682,40 +700,39 @@ uint8_t ili9488_ts_DetectTouch() {
   }
   #endif
 
-	ret = 0;
-	if (TS_IO_DetectTouch()) {
-		x1 = TS_IO_GetX();
-		y1 = TS_IO_GetY();
-		i = TOUCH_MAXREPEAT;
-		while (i--) {
-			x2 = TS_IO_GetX();
-			y2 = TS_IO_GetY();
-			if ((ABS(x1 - x2) < TOUCH_FILTER)
-					&& (ABS(y1 - y2) < TOUCH_FILTER)) {
-				x1 = (x1 + x2) >> 1;
-				y1 = (y1 + y2) >> 1;
-				i = 0;
-				if (TS_IO_DetectTouch()) {
-					tx = x1;
-					ty = y1;
-					ret = 1;
-				}
-			} else {
-				x1 = x2;
-				y1 = y2;
+ret = 0;
+if (TS_IO_DetectTouch()) {
+	x1 = TS_IO_GetX();
+	y1 = TS_IO_GetY();
+	i = TOUCH_MAXREPEAT;
+	while (i--) {
+		x2 = TS_IO_GetX();
+		y2 = TS_IO_GetY();
+		if ((ABS(x1 - x2) < TOUCH_FILTER) && (ABS(y1 - y2) < TOUCH_FILTER)) {
+			x1 = (x1 + x2) >> 1;
+			y1 = (y1 + y2) >> 1;
+			i = 0;
+			if (TS_IO_DetectTouch()) {
+				tx = x1;
+				ty = y1;
+				ret = 1;
 			}
+		} else {
+			x1 = x2;
+			y1 = y2;
 		}
 	}
+}
 
 #if TS_MULTITASK_MUTEX == 1
   io_ts_busy = 0;
   #endif
 
-	return ret;
+return ret;
 }
 
 //-----------------------------------------------------------------------------
 void ili9488_ts_GetXY(int16_t *X, int16_t *Y) {
-	*X = tx, *Y = ty;
+*X = tx, *Y = ty;
 }
 #endif // #if ILI9488_TOUCH == 1

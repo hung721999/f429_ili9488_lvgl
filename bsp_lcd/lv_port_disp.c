@@ -11,6 +11,7 @@
  *********************/
 #include "lv_port_disp.h"
 #include <stdbool.h>
+#include "lcd_io_spi.h"
 
 /*********************
  *      DEFINES
@@ -26,6 +27,8 @@
 /**********************
  *      TYPEDEFS
  **********************/
+#define DMANUM_(a, b, c, d)             a
+#define DMANUM(a)                       DMANUM_(a)
 
 /**********************
  *  STATIC PROTOTYPES
@@ -40,7 +43,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 /**********************
  *  STATIC VARIABLES
  **********************/
-
+static lv_disp_drv_t disp_drv; /*Descriptor of a display driver*/
 /**********************
  *      MACROS
  **********************/
@@ -91,7 +94,7 @@ void lv_port_disp_init(void) {
 	 * Register the display in LVGL
 	 *----------------------------------*/
 
-	static lv_disp_drv_t disp_drv; /*Descriptor of a display driver*/
+
 	lv_disp_drv_init(&disp_drv); /*Basic initialization*/
 
 	/*Set up the functions to access to your display*/
@@ -153,8 +156,16 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 
 	/*IMPORTANT!!!
 	 *Inform the graphics library that you are ready with the flushing*/
+#if DMANUM(LCD_DMA_TX) == 0
+	lv_disp_flush_ready(disp_drv);
+#endif	// not use DMA
+}
+
+#if DMANUM(LCD_DMA_TX)
+void DMA2_STREAM3_IRQHANDLER_callback(void){
 	lv_disp_flush_ready(disp_drv);
 }
+#endif
 
 /*OPTIONAL: GPU INTERFACE*/
 
