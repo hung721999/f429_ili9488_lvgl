@@ -94,7 +94,6 @@ void lv_port_disp_init(void) {
 	 * Register the display in LVGL
 	 *----------------------------------*/
 
-
 	lv_disp_drv_init(&disp_drv); /*Basic initialization*/
 
 	/*Set up the functions to access to your display*/
@@ -162,8 +161,8 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 }
 
 #if DMANUM(LCD_DMA_TX)
-void DMA2_STREAM3_IRQHANDLER_callback(void){
-	lv_disp_flush_ready(disp_drv);
+void DMA2_STREAM3_IRQHANDLER_callback(void) {
+	lv_disp_flush_ready(&disp_drv);
 }
 #endif
 
