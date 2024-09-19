@@ -286,6 +286,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/../lvgl.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/widgets/lv_demo_widgets.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/widgets/../lv_demos.h \
+ C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/benchmark/lv_demo_benchmark.h \
+ C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/benchmark/../lv_demos.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/music/lv_demo_music.h \
  C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/music/../lv_demos.h \
  ../Core/Inc/rgb_mixer.h
@@ -577,6 +579,8 @@ C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/lv_demos
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/../lvgl.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/widgets/lv_demo_widgets.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/widgets/../lv_demos.h:
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/benchmark/lv_demo_benchmark.h:
+C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/benchmark/../lv_demos.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/music/lv_demo_music.h:
 C:/Users/Admin/STM32CubeIDE/workspace_1.15/F429_ILI9488_LVGL/lvgl/demos/music/../lv_demos.h:
 ../Core/Inc/rgb_mixer.h:

@@ -100,7 +100,8 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 //	rgb_mixer_create_ui();
-	lv_demo_widgets();
+//	lv_demo_widgets();
+	lv_demo_benchmark();
 	while (1) {
 		/* USER CODE END WHILE */
 

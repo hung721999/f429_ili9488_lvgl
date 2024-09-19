@@ -229,6 +229,8 @@ lvgl/demos/music/lv_demo_music_list.o: \
  ../lvgl/demos/music/../../src/extra/widgets/span/../../../lvgl.h \
  ../lvgl/demos/music/../widgets/lv_demo_widgets.h \
  ../lvgl/demos/music/../widgets/../lv_demos.h \
+ ../lvgl/demos/music/../benchmark/lv_demo_benchmark.h \
+ ../lvgl/demos/music/../benchmark/../lv_demos.h \
  ../lvgl/demos/music/../music/lv_demo_music.h \
  ../lvgl/demos/music/lv_demo_music_main.h
 ../lvgl/demos/music/lv_demo_music_list.h:
@@ -462,5 +464,7 @@ lvgl/demos/music/lv_demo_music_list.o: \
 ../lvgl/demos/music/../../src/extra/widgets/span/../../../lvgl.h:
 ../lvgl/demos/music/../widgets/lv_demo_widgets.h:
 ../lvgl/demos/music/../widgets/../lv_demos.h:
+../lvgl/demos/music/../benchmark/lv_demo_benchmark.h:
+../lvgl/demos/music/../benchmark/../lv_demos.h:
 ../lvgl/demos/music/../music/lv_demo_music.h:
 ../lvgl/demos/music/lv_demo_music_main.h:
