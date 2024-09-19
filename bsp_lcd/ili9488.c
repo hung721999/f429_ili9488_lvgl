@@ -1,18 +1,11 @@
 #include "ili9488.h"
 #include "lcd_io_spi.h"
+#include "lv_port_disp.h"
 
 #include "main.h"
 
-extern void WaitForDmaEnd(void);
-extern void LCD_IO_WriteMultiData8(uint8_t *pData, uint32_t Size, uint32_t dinc);
-#define BITBAND_ACCESS(a, b) *(volatile uint32_t *)(((uint32_t) & a & 0xF0000000) + 0x2000000 + (((uint32_t) & a & 0x000FFFFF) << 5) + (b << 2))
-#define LcdSpiMode8() BITBAND_ACCESS(SPI1->CR1, SPI_CR1_DFF_Pos) = 0
 #define DMANUM_(a, b, c, d) a
 #define DMANUM(a) DMANUM_(a)
-#define GPIOX_ODR_(a, b) BITBAND_ACCESS(GPIO##a->ODR, b)
-#define GPIOX_ODR(a) GPIOX_ODR_(a)
-#define LCD_CS_ON GPIOX_ODR(LCD_CS) = 0
-#define LCD_CS_OFF GPIOX_ODR(LCD_CS) = 1
 
 #define ILI9488_NOP 0x00
 #define ILI9488_SWRESET 0x01
@@ -627,27 +620,18 @@ void ili9488_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 	ILI9488_LCDMUTEX_PUSH();
 	ili9488_SetDisplayWindow(Xpos, Ypos, Xsize, Ysize);
 #if ILI9488_INTERFACE == 0
-	LCD_IO_WriteCmd8(ILI9488_RAMWR);
-#if DMANUM(LCD_DMA_TX)
-	uint8_t *data = NULL;
+	// 15 lines for the best performance, the limit is 1 transfer DMA (FFFE)
+	// since the for loop convert 16bit img to 8bit in drawRGBimage take too much time
+	// when the number lines is bigger
+	uint8_t data[MY_DISP_HOR_RES * 15 * 3] = {0};
 	for (uint32_t i = 0; i < size * 3; i += 3)
 	{
-		data[i] = (*pdata & 0xF800) >> 8;
-		data[i + 1] = (*pdata & 0x07E0) >> 3;
-		data[i + 2] = (*pdata & 0x001F) << 3;
+		data[i] = ((*pdata & 0xF800) >> 8);
+		data[i + 1] = ((*pdata & 0x07E0) >> 3);
+		data[i + 2] = ((*pdata & 0x001F) << 3);
 		pdata++;
 	}
-	WaitForDmaEnd();
-	LcdSpiMode8();
-	LCD_CS_ON;
-	LCD_IO_WriteMultiData8(data, size * 3, 1);
-#else
-	while (size--)
-	{
-		ili9488_write16to24(*pdata);
-		pdata++;
-	}
-#endif
+	LCD_IO_WriteCmd8MultipleData8(ILI9488_RAMWR, data, size * 3);
 
 #elif ILI9488_INTERFACE == 1
 	LCD_IO_WriteCmd8MultipleData16(ILI9488_RAMWR, pdata, size);

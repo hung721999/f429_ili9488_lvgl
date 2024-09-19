@@ -16,13 +16,6 @@
 /*********************
  *      DEFINES
  *********************/
-#ifndef MY_DISP_HOR_RES
-#define MY_DISP_HOR_RES 480
-#endif
-
-#ifndef MY_DISP_VER_RES
-#define MY_DISP_VER_RES 320
-#endif
 
 /**********************
  *      TYPEDEFS
@@ -86,8 +79,11 @@ void lv_port_disp_init(void)
 
 	/* Example for 2) */
 	static lv_disp_draw_buf_t draw_buf_dsc_2;
-	static lv_color_t buf_2_1[MY_DISP_HOR_RES * 10]; /*A buffer for 10 rows*/
-	static lv_color_t buf_2_2[MY_DISP_HOR_RES * 10]; /*An other buffer for 10 rows*/
+	// 15 lines for the best performance, the limit is 1 transfer DMA (FFFE)
+	// since the for loop convert 16bit img to 8bit in drawRGBimage take too much time
+	// when the number lines is bigger
+	static lv_color_t buf_2_1[MY_DISP_HOR_RES * 15]; /*A buffer for 40 rows*/
+	static lv_color_t buf_2_2[MY_DISP_HOR_RES * 15]; /*An other buffer for 40 rows*/
 	lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2,
 						  MY_DISP_HOR_RES * 10); /*Initialize the display buffer*/
 
@@ -156,7 +152,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
 		int16_t width = area->x2 - area->x1 + 1;
 		int16_t height = area->y2 - area->y1 + 1;
 		// ili9488_DrawBitmap not work since different format
-		ili9488_DrawRGBImage(area->x1, area->y1, width, height, color_p);
+		ili9488_DrawRGBImage(area->x1, area->y1, width, height, (uint16_t *) color_p);
 	}
 
 	/*IMPORTANT!!!
