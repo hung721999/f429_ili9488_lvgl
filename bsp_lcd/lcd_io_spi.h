@@ -66,7 +66,7 @@
  - 0: bitmap and fill drawing function end wait off
  - 1: bitmap drawing function end wait on, fill drawing function end wait off (default mode)
  - 2: bitmap and fill drawing function end wait on */
-#define LCD_DMA_TXWAIT 			1
+#define LCD_DMA_TXWAIT 			0
 
 /* Because there are DMA capable and DMA unable memory regions
  * here we can set what is the DMA unable region condition
