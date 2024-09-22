@@ -1,5 +1,0 @@
-../bsp_lcd/lv_port_indev.c:47:6:lv_port_indev_init	8	static
-../bsp_lcd/lv_port_indev.c:86:13:touchpad_init	8	static
-../bsp_lcd/lv_port_indev.c:93:13:touchpad_read	16	static
-../bsp_lcd/lv_port_indev.c:115:13:touchpad_is_pressed	8	static
-../bsp_lcd/lv_port_indev.c:122:13:touchpad_get_xy	40	static

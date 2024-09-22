@@ -1,9 +1,0 @@
-../bsp_lcd/ts_xpt2046.c:106:6:TS_IO_Delay	2
-../bsp_lcd/ts_xpt2046.c:231:6:TsWrite8	2
-../bsp_lcd/ts_xpt2046.c:241:10:TsRead16	3
-../bsp_lcd/ts_xpt2046.c:260:6:TS_IO_Init	1
-../bsp_lcd/ts_xpt2046.c:304:10:TS_IO_GetX	1
-../bsp_lcd/ts_xpt2046.c:316:10:TS_IO_GetY	1
-../bsp_lcd/ts_xpt2046.c:328:10:TS_IO_GetZ1	1
-../bsp_lcd/ts_xpt2046.c:340:10:TS_IO_GetZ2	1
-../bsp_lcd/ts_xpt2046.c:354:9:TS_IO_DetectTouch	3

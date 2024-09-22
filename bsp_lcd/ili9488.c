@@ -620,10 +620,10 @@ void ili9488_DrawRGBImage(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 	ILI9488_LCDMUTEX_PUSH();
 	ili9488_SetDisplayWindow(Xpos, Ypos, Xsize, Ysize);
 #if ILI9488_INTERFACE == 0
-	// 15 lines for the best performance, the limit is 1 transfer DMA (FFFE)
-	// since the for loop convert 16bit img to 8bit in drawRGBimage take too much time
-	// when the number lines is bigger
-	uint8_t data[MY_DISP_HOR_RES * 15 * 3] = {0};
+	// the number of bytes of data must below FFFE maximum of DMA
+	// the buffer in lv_port_disp is 40 give best fps
+	// the number of lines is 42 to prevent lost data, cause black lines
+	uint8_t data[MY_DISP_HOR_RES * 42 * 3] = {0};
 	for (uint32_t i = 0; i < size * 3; i += 3)
 	{
 		data[i] = ((*pdata & 0xF800) >> 8);

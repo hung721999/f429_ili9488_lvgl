@@ -79,13 +79,13 @@ void lv_port_disp_init(void)
 
 	/* Example for 2) */
 	static lv_disp_draw_buf_t draw_buf_dsc_2;
-	// 15 lines for the best performance, the limit is 1 transfer DMA (FFFE)
-	// since the for loop convert 16bit img to 8bit in drawRGBimage take too much time
-	// when the number lines is bigger
-	static lv_color_t buf_2_1[MY_DISP_HOR_RES * 15]; /*A buffer for 40 rows*/
-	static lv_color_t buf_2_2[MY_DISP_HOR_RES * 15]; /*An other buffer for 40 rows*/
+	// the number of bytes of data must below FFFE maximum of DMA
+	// the buffer in lv_port_disp is 40 give best fps
+	// the number of lines is 42 to prevent lost data, cause black lines
+	static lv_color_t buf_2_1[MY_DISP_HOR_RES * 40]; /*A buffer for 40 rows*/
+	static lv_color_t buf_2_2[MY_DISP_HOR_RES * 40]; /*An other buffer for 40 rows*/
 	lv_disp_draw_buf_init(&draw_buf_dsc_2, buf_2_1, buf_2_2,
-						  MY_DISP_HOR_RES * 10); /*Initialize the display buffer*/
+						  MY_DISP_HOR_RES * 40); /*Initialize the display buffer*/
 
 	/*-----------------------------------
 	 * Register the display in LVGL

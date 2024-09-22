@@ -1,6 +1,0 @@
-../bsp_lcd/lv_port_disp.c:48:6:lv_port_disp_init	1
-../bsp_lcd/lv_port_disp.c:121:13:disp_init	1
-../bsp_lcd/lv_port_disp.c:131:6:disp_enable_update	1
-../bsp_lcd/lv_port_disp.c:138:6:disp_disable_update	1
-../bsp_lcd/lv_port_disp.c:146:13:disp_flush	2
-../bsp_lcd/lv_port_disp.c:166:6:DMA2_STREAM3_IRQHANDLER_callback	1
