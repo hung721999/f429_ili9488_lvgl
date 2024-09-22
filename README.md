@@ -7,19 +7,19 @@ SPI1 is used to transmit data image, SPI3 to transmit data touchpad.
 
 ## Connection:
 ### SPI 1 <-------> LCD:
-LCD_RST 	PD14  
-LCD_RS 		PD15
-LCD_CS 		PF12
-LCD_SCK 	PA5
-LCD_MOSI 	PA7
-LCD_MISO 	PA6 
+LCD_RST 	PD14  <br>
+LCD_RS 		PD15  <br>
+LCD_CS 		PF12  <br>
+LCD_SCK 	PA5   <br>
+LCD_MOSI 	PA7  <br>
+LCD_MISO 	PA6  <br>
 
 ### SPI 3 <-------> LCD:
-TS_CS             PC9
-TS_SCK            PC10
-TS_MOSI           PC12
-TS_MISO           PC11
-TS_IRQ            PC8  
+TS_CS             PC9    <br>
+TS_SCK            PC10   <br>
+TS_MOSI           PC12   <br>
+TS_MISO           PC11   <br>
+TS_IRQ            PC8    <br>
 
 
 ![CN on STM32F429 Nucleo](connector.png)
